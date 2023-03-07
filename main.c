@@ -67,6 +67,9 @@ int verifierLigneColonne(int tab[9][9], int ligne, int ligneOrCol){
     return result;
 }
 
+int verifRegion(int tab[9][9]){
+    //A TERMINER
+}
 
 //Écrire la fonction verifierGrille() qui renvoie 1 si la grille est correctement remplie et 0 sinon
 
@@ -75,6 +78,7 @@ int verifierGrille(int tab[9][9]){
     for(int i = 0; i < 9; i++){
         int verifCol = verifierLigneColonne(tab, i, 0);
         int verifLigne = verifierLigneColonne(tab, i, 1);
+        int verifRegion = verifRegion(tab, i);
         if(verifCol || verifLigne){
             printf("\n\nAhrf, il semblerait que votre solution ne corresponde pas aux regles, reessayez !\n\n");
         isCorrect = 0;
@@ -148,11 +152,21 @@ int saisir(int tab[9][9]){
     return result;
 }
 
-
-
-
-
-
+int verifGagnant(int tab[9][9]){
+    int inconnu = 0;
+    for(int i = 0; i < 9; i++){
+        for(int j= 0; j < 9; j++){
+            if (tab[i][j] == 0){
+                inconnu++;
+            }
+        }
+    }
+    if (inconnu > 0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
 /*
 Écrire la fonction verifierRegion() qui prend en paramètre deux indices k et l qui correspondent à la région (k,l)
 et qui renvoie 1 si la région est correctement remplie, 0 sinon.
@@ -207,9 +221,9 @@ int main(){
     do{
     saisir(tableauJoueur);
     afficher(tableauJoueur);
-    isTurning = // Retour d'une fonction qui renvoi 1 si tableau joueur 
+    isTurning = verifGagnant(tableauJoueur);// Retour d'une fonction qui renvoi 1 si tableau joueur 
     //Comporte un ou des 0
-    } while(isTurning)
+    } while(isTurning);
     //Ne pas toucher au code ci dessous
     system("pause");
     return 0;
