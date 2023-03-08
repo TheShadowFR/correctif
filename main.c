@@ -67,8 +67,53 @@ int verifierLigneColonne(int tab[9][9], int ligne, int ligneOrCol){
     return result;
 }
 
-int verifRegion(int tab[9][9]){
-    //A TERMINER
+int verifRegion(int tabTemporaire[9][9], int tab[9][9]){
+    // int coloneCase;
+    // int ligneCase;
+    int x;
+    int y;
+    int verification[9][9]
+    int result = 0;
+    
+    for (i = 0; i < 9; i++) {
+        for (j = 0; j < 9; j++) {
+            if (tabTemporaire[i][j] != tab[i][j]) {
+                x = i;
+                y = j;
+            }
+        }
+    }
+    
+    if (x <= 3){
+        coloneCase = 1;
+    }
+    else if (x <= 6){
+        coloneCase = 4;
+    }
+    else if (x <= 9){
+        coloneCase = 7;
+    }
+    if (y <= 3){
+        ligneCase = 1;
+    }
+    else if (y <= 6){
+        ligneCase = 4;
+    }
+    else if (y <= 9){
+        ligneCase = 7;
+    }
+    for(i = coloneCase ;i<(coloneCase + 3); ++i){
+        for(j= ligneCase; j<(ligneCase + 3); ++j){
+            if (x != i && y != j){
+                if (tabTemporaire[i][j] == verification[x][y]) {
+                    result = 1;
+                }
+            }
+            
+        }
+    }
+    return result;
+    
 }
 
 //Écrire la fonction verifierGrille() qui renvoie 1 si la grille est correctement remplie et 0 sinon
@@ -78,13 +123,12 @@ int verifierGrille(int tab[9][9]){
     for(int i = 0; i < 9; i++){
         int verifCol = verifierLigneColonne(tab, i, 0);
         int verifLigne = verifierLigneColonne(tab, i, 1);
-        int verifRegion = verifRegion(tab, i);
-        if(verifCol || verifLigne){
+        if(verifCol || verifLigne || verifierRegion){
             printf("\n\nAhrf, il semblerait que votre solution ne corresponde pas aux regles, reessayez !\n\n");
         isCorrect = 0;
         }
     }
-
+    int verifRegion = verifRegion(tab, i);
     //faire la fonction  Verifier Region et l'implémenter ici
 
     return isCorrect;
@@ -153,18 +197,12 @@ int saisir(int tab[9][9]){
 }
 
 int verifGagnant(int tab[9][9]){
-    int inconnu = 0;
     for(int i = 0; i < 9; i++){
         for(int j= 0; j < 9; j++){
             if (tab[i][j] == 0){
-                inconnu++;
+                return 1;
             }
         }
-    }
-    if (inconnu > 0){
-        return 1;
-    }else{
-        return 0;
     }
 }
 /*
