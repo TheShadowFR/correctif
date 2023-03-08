@@ -68,18 +68,19 @@ int verifierLigneColonne(int tab[9][9], int ligne, int ligneOrCol){
 }
 
 int verifRegion(int tabTemporaire[9][9], int tab[9][9]){
-    // int coloneCase;
-    // int ligneCase;
+    int coloneCase;
+    int ligneCase;
     int x;
     int y;
-    int verification[9][9]
+    int verification[9][9];
     int result = 0;
     
-    for (i = 0; i < 9; i++) {
-        for (j = 0; j < 9; j++) {
+    for (int i = 0; i < 9; i++) {
+        for (int j = 0; j < 9; j++) {
             if (tabTemporaire[i][j] != tab[i][j]) {
                 x = i;
                 y = j;
+                tabTemporaire[i][j] = verification[i][j];
             }
         }
     }
@@ -102,8 +103,8 @@ int verifRegion(int tabTemporaire[9][9], int tab[9][9]){
     else if (y <= 9){
         ligneCase = 7;
     }
-    for(i = coloneCase ;i<(coloneCase + 3); ++i){
-        for(j= ligneCase; j<(ligneCase + 3); ++j){
+    for(int i = coloneCase ;i<(coloneCase + 3); ++i){
+        for(int j= ligneCase; j<(ligneCase + 3); ++j){
             if (x != i && y != j){
                 if (tabTemporaire[i][j] == verification[x][y]) {
                     result = 1;
@@ -123,12 +124,12 @@ int verifierGrille(int tab[9][9]){
     for(int i = 0; i < 9; i++){
         int verifCol = verifierLigneColonne(tab, i, 0);
         int verifLigne = verifierLigneColonne(tab, i, 1);
-        if(verifCol || verifLigne || verifierRegion){
+        if(verifCol || verifLigne){
             printf("\n\nAhrf, il semblerait que votre solution ne corresponde pas aux regles, reessayez !\n\n");
         isCorrect = 0;
         }
     }
-    int verifRegion = verifRegion(tab, i);
+    // int verifRegion = verifRegion(tab, i);
     //faire la fonction  Verifier Region et l'implémenter ici
 
     return isCorrect;
