@@ -54,9 +54,7 @@ int verifRep(int tabRep[4], int secret[4], int tabAide[4]){
                 for (int k = 0; k < 4; k++){
                     if (tabAide[k] == "0"){
                         tabAide[k] = "1";
-                    }
-                    
-                    
+                    }            
                 }
             }
         }
@@ -128,7 +126,7 @@ int main(){
 
     generer(secret);
 
-    while (tour <1){
+    while (tour > 1){
         saisir(reponse);
         for (int i = 0; i <4; i++){
             printf("%c\n", reponse[i]);
@@ -147,6 +145,7 @@ int main(){
     if (tour <= 0){
         printf("Vous avez perdu !!!!!!!!!!!!!!");
     }  
+    
     system("pause");
     return 0;
 
