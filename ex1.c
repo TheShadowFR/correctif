@@ -9,49 +9,62 @@ int generer(int tab[4]){
         tab[i] = rand() %6+1;
         printf("%d\n", tab[i]);
     };
+    return 0;
 }
 
-int saisir(int tab[4]){
+int saisir(char tab[4]){
     printf("\nEcriver 4 lettre (parmis: P B M Y O G): ");
-    scanf("%s %s %s %s", tab[1], tab[2], tab[3], tab[4]);
+    scanf("%c %c %c %c", &tab[0], &tab[1], &tab[2], &tab[3]);
+    return 0;
 }
 
 int afficherLettre(int tab[4]){
     for (int i = 0; i<4; i++){
-        if (tab[i] == 1){
+        if (tab[i] == 0){
+            printf("    °");
+        }
+        else if (tab[i] == 1){
             printf("    P");
         }
         else if (tab[i] == 2){
-            printf("    B");
-        }
-        else if (tab[i] == 3){
-            printf("    M");
-        }
-        else if (tab[i] == 4){
-            printf("    Y");
-        }
-        else if (tab[i] == 5){
-            printf("     O");
-        }
-        else if (tab[i] == 6){
-            printf("     G");
+            printf("    V");
         }
     };
+    return 0;
 }
+
 int verifRep(int tabRep[4], int secret[4], int tabAide[4]){
     int bonneRep = 0;
     for (int i = 0; i < 4; i++){
         if (tabRep[i] == secret[4]){
-            tabAide[i] = "2";
+            for (int k = 0; k < 4; k++){
+                    if (tabAide[k] == "0"){
+                        tabAide[k] = "2";
+                    }
+                }
             bonneRep++;
         }
     }
     if (bonneRep == 4){
-        printf("Vous avez gagner !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        printf("Vous avez gagner !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     }
+    for (int i = 0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            if (tabRep[i] == secret[j]){
+                for (int k = 0; k < 4; k++){
+                    if (tabAide[k] == "0"){
+                        tabAide[k] = "1";
+                    }
+                    
+                    
+                }
+            }
+        }
+    }
+    return 0;
 }
 
-int afficherChiffre(int tab[4], int tabChiffre[4]){
+int afficherChiffre(char tab[4], int tabChiffre[4]){
     for (int i = 0; i<4; i++){
         if (tab[i] == "P"){
             printf("1");
@@ -78,55 +91,62 @@ int afficherChiffre(int tab[4], int tabChiffre[4]){
             tabChiffre[i] = 6;
         }
     };
+    return 0;
 }
 
-int ecran(int tabRep[4], int tabMelange[4]){
+int ecran(char tabRep[4], int aideLettre[4]){
     printf("--------------------------------|##|\n");
-    printf("                                |%s%s|", tabMelange[1],tabMelange[2]);
+    printf("                                |%c%c|", aideLettre[0],aideLettre[1]);
     afficherLettre(tabRep);
-    printf("|%s%s|", tabMelange[3],tabMelange[4]);
+    printf("|%c%c|", aideLettre[2],aideLettre[3]);
+    return 0;
 }
 
-int rangementator(int tabRep[4]){
-    int tabMelange[4];
+int rangementator(int tabAide[4], int aideLettre[4]){
     srand(time(NULL));
     for (int i = 0; i<4; i++){
         int hazard = rand() %4;
-        if (tabMelange[hazard]){
-            tabMelange[hazard] = tabRep[i];
+        if (aideLettre[hazard]){
+            aideLettre[hazard] = aideLettre[i];
         }else{
             i--;
         }
     };
-    printf("%d", tabMelange);
-
+    printf("%d", aideLettre);
+    return 0;
 }
 
 
 int main(){
-    printf("ok");
     int secret[4];
-    int reponse[4];
+    char reponse[4];
     int reponseChiffre[4];
-    int aideLettre[4];
     int tabAide[4];
+    char aideLettre[4];
+    int tour = 10;
+    
 
     generer(secret);
-    saisir(reponse);
-    afficherChiffre(reponse, reponseChiffre);
-    verifRep(reponseChiffre, secret, tabAide);
-    rangementator(tabAide);
-    afficherLettre(tabAide);
-    ecran(reponse, aideLettre);
-    
-    // saisir(tableau2);
-    // afficher(tableau2);
-    // if (verifier(tableau1, tableau2)){
-    //     printf("code secret faux");
-    // }else{
-    //     printf("ok");
-    // }
 
+    while (tour <1){
+        saisir(reponse);
+        for (int i = 0; i <4; i++){
+            printf("%c\n", reponse[i]);
+        }
+    
+        afficherChiffre(reponse, reponseChiffre);
+        for (int i = 0; i <4; i++){
+            printf("%d\n", reponseChiffre[i]);
+        }
+        verifRep(reponseChiffre, secret, tabAide);
+        rangementator(tabAide, aideLettre[4]);
+        ecran(reponse, aideLettre[4]);
+        tour++;
+        printf("il vous reste %d tour(s)", tour);
+    }
+    if (tour <= 0){
+        printf("Vous avez perdu !!!!!!!!!!!!!!");
+    }  
     system("pause");
     return 0;
 
