@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 int generer(int tab[4]){
     srand(time(NULL));
     for (int i = 0; i<4; i++){
@@ -37,36 +38,44 @@ int afficherLettre(int tab[4]){
         }
     };
 }
-int verifRep(int tabRep[4], int secret[4]){
+int verifRep(int tabRep[4], int secret[4], int tabAide[4]){
+    int bonneRep = 0;
     for (int i = 0; i < 4; i++){
-        if (tabRep[i] == secret[]){
-            
+        if (tabRep[i] == secret[4]){
+            tabAide[i] = "2";
+            bonneRep++;
         }
-        if (tabRep[i] == secret[j]){
-
-        }
+    }
+    if (bonneRep == 4){
+        printf("Vous avez gagner !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     }
 }
 
-int afficherChiffre(int tab[4]){
+int afficherChiffre(int tab[4], int tabChiffre[4]){
     for (int i = 0; i<4; i++){
         if (tab[i] == "P"){
             printf("1");
+            tabChiffre[i] = 1;
         }
         else if (tab[i] == "B"){
             printf("2");
+            tabChiffre[i] = 2;
         }
         else if (tab[i] == "M"){
             printf("3");
+            tabChiffre[i] = 3;
         }
         else if (tab[i] == "Y"){
             printf("4");
+            tabChiffre[i] = 4;
         }
         else if (tab[i] == "O"){
             printf("5");
+            tabChiffre[i] = 5;
         }
         else if (tab[i] == "G"){
             printf("6");
+            tabChiffre[i] = 6;
         }
     };
 }
@@ -92,28 +101,24 @@ int rangementator(int tabRep[4]){
     printf("%d", tabMelange);
 
 }
-// int verifier(int tab1[4], int tab2[4]){
-//     for (int i = 0; i<4; i++){
-//         if (tab1[i] != tab2[i]){
-//             return 1;
-//         }
-//     };
-// }
 
 
 int main(){
+    printf("ok");
     int secret[4];
     int reponse[4];
+    int reponseChiffre[4];
+    int aideLettre[4];
+    int tabAide[4];
 
     generer(secret);
     saisir(reponse);
-    afficherChiffre(reponse);
-    verifRep();
-    rangementator()
-    afficherLettre(tableau1);
-    saisir(tableau2);
+    afficherChiffre(reponse, reponseChiffre);
+    verifRep(reponseChiffre, secret, tabAide);
+    rangementator(tabAide);
+    afficherLettre(tabAide);
+    ecran(reponse, aideLettre);
     
-    rangementator(tableau2);
     // saisir(tableau2);
     // afficher(tableau2);
     // if (verifier(tableau1, tableau2)){
