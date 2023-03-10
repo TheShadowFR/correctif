@@ -64,27 +64,27 @@ int verifRep(int tabRep[4], int secret[4], int tabAide[4]){
 
 int afficherChiffre(char tab[4], int tabChiffre[4]){
     for (int i = 0; i<4; i++){
-        if (tab[i] == "P"){
+        if (tab[i] == 'P'){
             printf("1");
             tabChiffre[i] = 1;
         }
-        else if (tab[i] == "B"){
+        else if (tab[i] == 'B'){
             printf("2");
             tabChiffre[i] = 2;
         }
-        else if (tab[i] == "M"){
+        else if (tab[i] == 'M'){
             printf("3");
             tabChiffre[i] = 3;
         }
-        else if (tab[i] == "Y"){
+        else if (tab[i] == 'Y'){
             printf("4");
             tabChiffre[i] = 4;
         }
-        else if (tab[i] == "O"){
+        else if (tab[i] == 'O'){
             printf("5");
             tabChiffre[i] = 5;
         }
-        else if (tab[i] == "G"){
+        else if (tab[i] == 'G'){
             printf("6");
             tabChiffre[i] = 6;
         }
@@ -118,7 +118,7 @@ int rangementator(int tabAide[4], int aideLettre[4]){
 int main(){
     int secret[4];
     char reponse[4];
-    int reponseChiffre[4];
+    int tabChiffre[4];
     int tabAide[4];
     char aideLettre[4];
     int tour = 10;
@@ -132,11 +132,11 @@ int main(){
             printf("%c\n", reponse[i]);
         }
     
-        afficherChiffre(reponse, reponseChiffre);
+        afficherChiffre(reponse, tabChiffre);
         for (int i = 0; i <4; i++){
-            printf("%d\n", reponseChiffre[i]);
+            printf("%d\n", tabChiffre[i]);
         }
-        verifRep(reponseChiffre, secret, tabAide);
+        verifRep(tabChiffre, secret, tabAide);
         rangementator(tabAide, aideLettre[4]);
         ecran(reponse, aideLettre[4]);
         tour++;
